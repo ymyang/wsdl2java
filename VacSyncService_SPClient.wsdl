@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:tns3="http://rsp.sync.soap.bossagent.vac.unicom.com" xmlns:impl="http://soap.bossagent.vac.unicom.com" xmlns:intf="http://soap.bossagent.vac.unicom.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns2="http://req.sync.soap.bossagent.vac.unicom.com" xmlns:tns4="http://type.sync.soap.bossagent.vac.unicom.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://soap.bossagent.vac.unicom.com">
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://req.sync.soap.bossagent.vac.unicom.com">
+			<import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+			<complexType name="OrderRelationUpdateNotifyRequest">
+				<sequence>
+					<element name="recordSequenceId" nillable="true" type="soapenc:string"/>
+					<element name="userIdType" nillable="true" type="soapenc:int"/>
+					<element name="userId" nillable="true" type="soapenc:string"/>
+					<element name="serviceType" nillable="true" type="soapenc:string"/>
+					<element name="spId" nillable="true" type="soapenc:string"/>
+					<element name="productId" nillable="true" type="soapenc:string"/>
+					<element name="updateType" nillable="true" type="soapenc:int"/>
+					<element name="updateTime" nillable="true" type="soapenc:string"/>
+					<element name="updateDesc" nillable="true" type="soapenc:string"/>
+					<element name="linkId" nillable="true" type="soapenc:string"/>
+					<element name="content" nillable="true" type="soapenc:string"/>
+					<element name="effectiveDate" nillable="true" type="soapenc:string"/>
+					<element name="expireDate" nillable="true" type="soapenc:string"/>
+					<element name="time_stamp" nillable="true" type="soapenc:string"/>
+					<element name="encodeStr" nillable="true" type="soapenc:string"/>
+				</sequence>
+			</complexType>
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://rsp.sync.soap.bossagent.vac.unicom.com">
+			<import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+			<complexType name="OrderRelationUpdateNotifyResponse">
+				<sequence>
+					<element name="recordSequenceId" nillable="true" type="soapenc:string"/>
+					<element name="resultCode" type="xsd:int"/>
+				</sequence>
+			</complexType>
+		</schema>
+	</wsdl:types>
+	<wsdl:message name="orderRelationUpdateNotifyRequest">
+		<wsdl:part name="orderRelationUpdateNotifyRequest" type="tns2:OrderRelationUpdateNotifyRequest"/>
+	</wsdl:message>
+	<wsdl:message name="orderRelationUpdateNotifyResponse">
+		<wsdl:part name="orderRelationUpdateNotifyReturn" type="tns3:OrderRelationUpdateNotifyResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="SyncNotifySPService">
+		<wsdl:operation name="orderRelationUpdateNotify" parameterOrder="orderRelationUpdateNotifyRequest">
+			<wsdl:input name="orderRelationUpdateNotifyRequest" message="impl:orderRelationUpdateNotifyRequest"/>
+			<wsdl:output name="orderRelationUpdateNotifyResponse" message="impl:orderRelationUpdateNotifyResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SyncNotifySPSoapBinding" type="impl:SyncNotifySPService">
+		<wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="orderRelationUpdateNotify">
+			<wsdlsoap:operation/>
+			<wsdl:input>
+				<wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://soap.bossagent.vac.unicom.com"/>
+			</wsdl:input>
+			<wsdl:output>
+				<wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://soap.bossagent.vac.unicom.com"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SyncNotifySPServiceService">
+		<wsdl:port name="SyncNotifySP" binding="impl:SyncNotifySPSoapBinding">
+			<wsdlsoap:address location="http://localhost/services/VacSync"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
