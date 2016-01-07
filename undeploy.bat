@@ -1,3 +1,3 @@
-java -Djava.ext.dirs=lib org.apache.axis.client.AdminClient deploy.wsdd
+java -Djava.ext.dirs=lib org.apache.axis.client.AdminClient undeploy.wsdd
 
 pause 
